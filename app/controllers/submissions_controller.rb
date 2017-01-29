@@ -1,5 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :edit, :update, :destroy]
+  # Authenticate users before showing certain content
+  before_filter :authenticate_user!, except: [:index, :show]
 
   # GET /submissions
   # GET /submissions.json
@@ -14,7 +16,7 @@ class SubmissionsController < ApplicationController
 
   # GET /submissions/new
   def new
-    @submission = Submission.new
+    @submission = current_user.submissions.build
   end
 
   # GET /submissions/1/edit
@@ -24,7 +26,7 @@ class SubmissionsController < ApplicationController
   # POST /submissions
   # POST /submissions.json
   def create
-    @submission = Submission.new(submission_params)
+    @submission = current_user.submissions.build(submission_params)
 
     respond_to do |format|
       if @submission.save
