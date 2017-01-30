@@ -1,0 +1,113 @@
+@charset 'utf-8';
+
+@import 'settings';
+@import 'foundation';
+@import 'foundation-icons.scss';
+
+// If you'd like to include motion-ui the foundation-rails gem comes prepackaged with it, uncomment the 3 @imports, if you are not using the gem you need to install the motion-ui sass package.
+//
+// @import 'motion-ui/motion-ui';
+
+// We include everything by default.  To slim your CSS, remove components you don't use.
+
+@include foundation-global-styles;
+@include foundation-grid;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-accordion;
+@include foundation-accordion-menu;
+@include foundation-badge;
+@include foundation-breadcrumbs;
+@include foundation-button-group;
+@include foundation-callout;
+@include foundation-card;
+@include foundation-close-button;
+@include foundation-drilldown-menu;
+@include foundation-dropdown;
+@include foundation-dropdown-menu;
+@include foundation-responsive-embed;
+@include foundation-label;
+@include foundation-media-object;
+@include foundation-menu;
+@include foundation-menu-icon;
+@include foundation-off-canvas;
+@include foundation-orbit;
+@include foundation-pagination;
+@include foundation-progress-bar;
+@include foundation-slider;
+@include foundation-sticky;
+@include foundation-reveal;
+@include foundation-switch;
+@include foundation-table;
+@include foundation-tabs;
+@include foundation-thumbnail;
+@include foundation-title-bar;
+@include foundation-tooltip;
+@include foundation-top-bar;
+
+
+// If you'd like to include motion-ui the foundation-rails gem comes prepackaged with it, uncomment the 3 @imports, if you are not using the gem you need to install the motion-ui sass package.
+//
+// @include motion-ui-transitions;
+// @include motion-ui-animations;
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+}
+
+p {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+}
+
+#main {
+  background-color: rgb(246, 246, 239);
+  padding-bottom: 20px;
+}
+
+
+.post a, .post p {
+  color: #828282;
+  font-size: 12px;
+}
+
+
+.top-bar {
+  padding: 0;
+  background-color: rgb(255, 102, 0);
+  height: 30px;
+  min-height: 30px;
+  ul {
+    background: none;
+  }
+  li {
+    padding: 0;
+  &.menu-text {
+    padding: 0px 15px;
+  }
+    a {
+      text-align: center;
+      color: #000000;
+      padding: 0;
+      line-height: 30px;
+      margin-right: 1em;
+    }
+  }
+}
+
+// .fa-lg {
+//   color: #828282;
+// }
+//
+// #comments {
+//   margin-top: 5em;
+// }
+//
+// .lead {
+//   font-size: 14px;
+// }

@@ -1,32 +1,53 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Hackernews</title>
-    <%= csrf_meta_tags %>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <title><%= content_for?(:title) ? yield(:title) : "Hackernews" %></title>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= csrf_meta_tags %>
+
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Oswald:700|Ubuntu:300,400,400i,700" rel="stylesheet">
+</head>
 
   <body>
-
-    <% flash.each do |name, msg| %>
-      <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
-    <% end %>
-
-    <% if user_signed_in? %>
-      <ul>
-        <li><%= link_to "Submit", new_submission_path %></li>
-        <li><%= link_to "Account", edit_user_registration_path %></li>
-        <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-      </ul>
-    <% else %>
-      <ul>
-        <li><%= link_to "Sign up", new_user_registration_path %></li>
-        <li><%= link_to "Sign in", new_user_session_path %></li>
-      </ul>
-    <% end %>
-
-    <%= yield %>
+    <div class="row">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <ul class="menu">
+            <li class="menu-text">Hackernews-clone</li>
+            <li><%= link_to "Home", root_path %></li>
+          </ul>
+        </div>
+        <div class="top-bar-right">
+          <ul class="menu">
+            <% if user_signed_in? %>
+              <li><%= link_to "Submit", new_submission_path %></li>
+              <li><%= link_to "Account", edit_user_registration_path %></li>
+              <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+            <% else %>
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <li><%= link_to "Sign in", new_user_session_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="main" class="row columns" style="padding-top: 0;">
+      <% flash.each do |name, msg| %>
+        <div class="alert callout" data-closable>
+          <p><%= content_tag(:div, msg, class: "alert alert-#{name}") %></p>
+          <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
+
 </html>

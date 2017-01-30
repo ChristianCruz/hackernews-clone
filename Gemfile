@@ -22,6 +22,12 @@ gem 'jbuilder', '~> 2.5'
 # Devise gem for user authentication
 gem 'devise', '~> 4.2'
 
+# Add front end framework
+gem 'foundation-rails'
+
+# Foundation Icons font-size
+gem 'foundation-icons-sass-rails'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
