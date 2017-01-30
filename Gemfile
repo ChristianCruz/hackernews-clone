@@ -31,6 +31,12 @@ gem 'foundation-icons-sass-rails'
 # Add gem for voting system
 gem 'acts_as_votable', '~> 0.10.0'
 
+# Simple form for the comments
+gem 'simple_form'
+
+# This gem provides methods for generating container tags, such as div, for your record.
+gem 'record_tag_helper', '~> 1.0'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
