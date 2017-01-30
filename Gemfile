@@ -28,6 +28,9 @@ gem 'foundation-rails'
 # Foundation Icons font-size
 gem 'foundation-icons-sass-rails'
 
+# Add gem for voting system
+gem 'acts_as_votable', '~> 0.10.0'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
