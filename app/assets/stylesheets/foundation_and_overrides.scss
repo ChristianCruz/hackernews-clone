@@ -2,7 +2,7 @@
 
 @import 'settings';
 @import 'foundation';
-@import 'foundation-icons.scss';
+@import 'foundation-icons/foundation-icons.scss';
 
 // If you'd like to include motion-ui the foundation-rails gem comes prepackaged with it, uncomment the 3 @imports, if you are not using the gem you need to install the motion-ui sass package.
 //
@@ -55,6 +55,10 @@
 // @include motion-ui-animations;
 
 
+// - - - - - - - - - - - - - - - - - - - - - -
+// - GENERAL STYLES
+// - - - - - - - - - - - - - - - - - - - - - -
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
@@ -64,18 +68,6 @@ p {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 400;
 }
-
-#main {
-  background-color: rgb(246, 246, 239);
-  padding-bottom: 20px;
-}
-
-
-.post a, .post p {
-  color: #828282;
-  font-size: 12px;
-}
-
 
 .top-bar {
   padding: 0;
@@ -100,14 +92,17 @@ p {
   }
 }
 
-// .fa-lg {
-//   color: #828282;
-// }
-//
-// #comments {
-//   margin-top: 5em;
-// }
-//
-// .lead {
-//   font-size: 14px;
-// }
+#main {
+  background-color: rgb(246, 246, 239);
+  padding-bottom: 20px;
+}
+
+
+// - - - - - - - - - - - - - - - - - - - - - -
+// - SUBMISSIONS LIST
+// - - - - - - - - - - - - - - - - - - - - - -
+
+.post a, .post p {
+  color: #828282;
+  // font-size: 12px;
+}
