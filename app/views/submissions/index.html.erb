@@ -1,28 +1,35 @@
-<table>
+<table id="submissions-list">
   <br>
-  <h3>Submissions list</h3>
-  <br>
+
+  <h3 class="text-center welcome">A collection of good &amp; bad UI design.</h3>
+
   <tbody>
      <% @submissions.each do |submission| %>
        <tr class="post">
          <td>
-           <%= link_to like_submission_path(submission), method: :put do %>
-             <span class="badge"><i class="fi-like"></i></span>
-           <% end %>
+           <div>
+             <span class="title-link"><%= link_to submission.title, submission_path(submission), class: "title" %> <small><i class="hide-for-small-only">Created <%= time_ago_in_words(submission.created_at) %> ago</i></small></span>
 
-           <%= link_to dislike_submission_path(submission), method: :put do %>
-             <span class="badge alert"><i class="fi-dislike"></i></span>
-           <% end %>
+             <span class="float-right">
+               <%= link_to like_submission_path(submission), method: :put do %>
+                 <span class="badge"><i class="fi-like"></i></span>
+               <% end %>
 
-           <%= link_to submission.title, submission.url, class: "title" %>
-           <small><%= link_to submission.url, "(#{submission.url})", target: "_blank", class: "float-right" %></small>
+               <%= link_to dislike_submission_path(submission), method: :put do %>
+                 <span class="badge alert"><i class="fi-dislike"></i></span>
+               <% end %>
+             </span>
+           </div>
+           <br>
+           <div>
+             <span>
+               <small><%= link_to submission.url, "(#{submission.url})", target: "_blank", class: "url-links " %></small>
+             </span>
+             <span class="float-right">
+               <%= submission.get_upvotes.size %> points • <%= link_to "#{submission.comments.count} comments", submission, style: "color: #376786;" %>
+             </span>
+           </div>
          </td>
-         <tr class="post">
-           <td>
-             <span><%= submission.get_upvotes.size %> points  <%= link_to "#{submission.comments.count} comments", submission %></span>
-             <span class="float-right"><small>Created <%= time_ago_in_words(submission.created_at) %> ago by <i><%= submission.user.email %></i></small></span>
-           </td>
-         </tr>
        </tr>
      <% end %>
    </tbody>

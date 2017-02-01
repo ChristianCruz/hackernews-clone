@@ -1,18 +1,29 @@
-<div class="callout">
+<div class="show-post">
+  <br>
+  <nav aria-label="You are here:" role="navigation">
+    <ul class="breadcrumbs">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Post category</a></li>
+      <li>
+        <span class="show-for-sr">Current: </span> <%= @submission.url %>
+      </li>
+    </ul>
+  </nav>
+  <hr>
   <h4>
-    <%= link_to like_submission_path(@submission), method: :put do %>
-      <i class="fi-like"></i>
-    <% end %>
     <%= @submission.title %>
-    <a href="<%= @submission.url %>"><%= @submission.url %></a>
   </h4>
-  <p><%= @submission.get_upvotes.size %> points by <%= @submission.user.email %> <%= time_ago_in_words(@submission.created_at) %> ago | <%= link_to "#{@submission.comments.count} comments", @submission %> </p>
+  URL: <a href="<%= @submission.url %>"><%= @submission.url %></a>
+  <br>
+  Posted <%= time_ago_in_words(@submission.created_at) %> ago by <%= @submission.user.email %>
+  <br><br>
+  <p><%= @submission.get_upvotes.size %> likes</p>
   <br>
 
   <%= simple_form_for [@submission, Comment.new] do |f| %>
-    <%= f.text_area :body, class: "form-control" %>
+    <%= f.text_area :body, class: "form-control", placeholder: "Either positive or negative, comments are good." %>
     <br>
-    <%= f.submit "add comment" %>
+    <%= f.submit "add comment", class: "large button" %>
   <% end %>
 
   <div id="comments">

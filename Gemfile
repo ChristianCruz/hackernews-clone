@@ -37,6 +37,9 @@ gem 'simple_form'
 # This gem provides methods for generating container tags, such as div, for your record.
 gem 'record_tag_helper', '~> 1.0'
 
+# For a cleaner rails console
+gem "awesome_print", require:"ap"
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
@@ -47,6 +50,12 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # Supporting gem for rails panel
+  gem 'meta_request'
+  # Better error package
+  gem "better_errors"
+  # Helps deal with N+1 queries
+  gem 'bullet'
 end
 
 group :production do

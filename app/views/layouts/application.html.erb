@@ -11,7 +11,7 @@
   <%= csrf_meta_tags %>
 
   <!-- GOOGLE FONTS -->
-  <link href="https://fonts.googleapis.com/css?family=Oswald:700|Ubuntu:300,400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Ubuntu:300,400,400i,500,700" rel="stylesheet">
 </head>
 
   <body>
@@ -19,13 +19,13 @@
       <div class="top-bar">
         <div class="top-bar-left">
           <ul class="menu">
-            <li class="menu-text">Hackernews-clone</li>
-            <li><%= link_to "Home", root_path %></li>
+            <li class="menu-text">UIndex</li>
           </ul>
         </div>
         <div class="top-bar-right">
           <ul class="menu">
             <% if user_signed_in? %>
+            <li><%= link_to "Home", root_path %></li>
               <li><%= link_to "Submit", new_submission_path %></li>
               <li><%= link_to "Account", edit_user_registration_path %></li>
               <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>

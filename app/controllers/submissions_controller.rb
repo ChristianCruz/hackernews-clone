@@ -6,7 +6,7 @@ class SubmissionsController < ApplicationController
   # GET /submissions
   # GET /submissions.json
   def index
-    @submissions = Submission.order(cached_votes_total: :desc)
+    @submissions = Submission.order(cached_votes_score: :desc)
   end
 
   # GET /submissions/1
