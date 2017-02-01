@@ -74,6 +74,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.7.0)
+    faker (1.7.2)
+      i18n (~> 0.5)
     ffi (1.9.17)
     foundation-icons-sass-rails (3.0.0)
       railties (>= 3.1.1)
@@ -212,6 +214,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   devise (~> 4.2)
+  faker
   foundation-icons-sass-rails
   foundation-rails
   jbuilder (~> 2.5)
