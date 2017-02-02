@@ -1,22 +1,50 @@
 require 'faker'
 
- # Create Submissions
- 50.times do
-   Submission.create!(
-     title:  Faker::Lorem.sentence,
-     url:   Faker::Internet.domain_name
-   )
- end
- submissions = Submission.all
+# Create Users
+5.times do
+  user = User.new(
+    email:    Faker::Internet.email,
+    password: Faker::Lorem.characters(10)
+  )
+  user.skip_confirmation!
+  user.save!
+end
+users = User.all
 
- # Create Comments
- 100.times do
-   Comment.create!(
-     submission: submissions.sample,
-     body: Faker::Lorem.paragraph
-   )
- end
+# Note: by calling `User.new` instead of `create`,
+# we create an instance of User which isn't immediately saved to the database.
 
- puts "Seed finished"
- puts "#{Submission.count} submissions created"
- puts "#{Comment.count} comments created"
+# The `skip_confirmation!` method sets the `confirmed_at` attribute
+# to avoid triggering an confirmation email when the User is saved.
+
+# The `save` method then saves this User to the database.
+
+# Create Submissions
+50.times do
+ Submission.create!(
+   user:   users.sample,
+   title:  Faker::Lorem.sentence,
+   url:   Faker::Internet.domain_name
+ )
+end
+submissions = Submission.all
+
+# Create Comments
+100.times do
+ Comment.create!(
+   submission: submissions.sample,
+   body: Faker::Lorem.paragraph
+ )
+end
+
+
+ user = User.first
+ user.skip_reconfirmation!
+ user.update_attributes!(
+   email: 'christian@simpleshape.me',
+   password: 'helloworld'
+ )
+
+puts "Seed finished"
+puts "#{Submission.count} submissions created"
+puts "#{Comment.count} comments created"

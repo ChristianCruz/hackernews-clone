@@ -43,6 +43,9 @@ gem "awesome_print", require:"ap"
 # To seed fake databse
 gem 'faker'
 
+# Dealing with sensitive data
+gem 'figaro', '1.0'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
