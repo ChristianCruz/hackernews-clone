@@ -49,6 +49,9 @@ gem 'figaro', '1.0'
 # Pundit to authorize different users to different tasks
 gem 'pundit'
 
+# Pagination for posts
+gem 'will_paginate', '~> 3.0.5'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end

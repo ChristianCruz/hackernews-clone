@@ -1,7 +1,7 @@
 class Submission < ApplicationRecord
   acts_as_votable
   belongs_to :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   scope :with_comments, -> {includes(:comments)}
 

@@ -19,7 +19,13 @@
   URL: <a href="<%= @submission.url %>"><%= @submission.url %></a>
   <br>
   Posted <%= time_ago_in_words(@submission.created_at) %> ago by <%= @submission.user.email %>
-  <br><br>
+  <br>
+
+  <% if policy(@submission).destroy? %>
+         <%= link_to "Delete post", @submission, method: :delete, class: 'large button', data: { confirm: 'Are you sure you want to delete this topic?' } %> 
+       <% end %>
+
+  <br>
   <p><%= @submission.get_upvotes.size %> likes</p>
   <br>
 

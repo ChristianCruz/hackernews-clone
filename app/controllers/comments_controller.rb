@@ -1,8 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
-  # POST /comments
-  # POST /comments.json
   def create
     @submission = Submission.find(params[:submission_id])
     @comment = @submission.comments.new(comment_params)
@@ -17,15 +15,19 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1
-  # DELETE /comments/1.json
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+
   def destroy
+    # @submission = Submission.find(params[:id])
+    @comment = Comment.find(params[:id])
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+        format.html { redirect_to submissions_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
+
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
 
   private
     # Use callbacks to share common setup or constraints between actions.

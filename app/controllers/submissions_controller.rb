@@ -8,7 +8,7 @@ class SubmissionsController < ApplicationController
   end
 
   def index
-    @submissions = Submission.order(cached_votes_score: :desc)
+    @submissions = Submission.order(cached_votes_score: :desc).paginate(page: params[:page], per_page: 10)
     authorize @submissions
   end
 
@@ -52,7 +52,7 @@ class SubmissionsController < ApplicationController
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
 
   def update
-    @submission = submission.find(params[:id])
+    @submission = Submission.find(params[:id])
     authorize @submission
     if @submission.update_attributes(params.require(:submission).permit(:title, :url))
      flash[:notice] = "Submission was updated."
@@ -66,11 +66,16 @@ class SubmissionsController < ApplicationController
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
 
   def destroy
-    @submission.destroy
-    respond_to do |format|
-      format.html { redirect_to submissions_url, notice: 'Submission was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @submission = Submission.find(params[:id])
+    authorize @submission
+
+    if @submission.destroy
+       flash[:notice] = "\"#{@submission.title}\" was deleted successfully."
+       redirect_to submissions_path
+     else
+       flash[:error] = "There was an error deleting the topic."
+       render :show
+     end
   end
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
