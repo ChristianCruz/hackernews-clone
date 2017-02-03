@@ -11,17 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
 
-  <div class="field">
-    <%= f.label :url %>
-    <%= f.text_field :url %>
-  </div>
-  <br>
-  <div class="actions">
-    <%= f.submit class: "large button" %>
-  </div>
-<% end %>
+  <%= form_group_tag(submission.errors[:title]) do %>
+       <%= f.label :title %>
+       <%= f.text_field :title, class: '', placeholder: "Enter submission title" %>
+     <% end %>
+     <%= form_group_tag(submission.errors[:body]) do %>
+       <%= f.label :url %>
+       <%= f.text_field :url, rows: 8, class: '', placeholder: "Enter submission url" %>
+     <% end %>
+     <div class="form-group">
+       <%= f.submit "Save", class: 'large button' %>
+     </div>
+   <% end %>
