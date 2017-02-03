@@ -38,14 +38,34 @@
       </div>
     </div>
     <div id="main" class="row columns" style="padding-top: 0;">
+      <br>
       <% flash.each do |name, msg| %>
-        <div class="alert callout" data-closable>
-          <p><%= content_tag(:div, msg, class: "alert alert-#{name}") %></p>
-          <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+        <% if flash[:notice] %>
+          <div class="callout primary" data-closable>
+            <p><%= content_tag(:div, msg, class: "primary") %></p>
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+        <% elsif flash[:error] %>
+          <div class="callout warning" data-closable>
+            <p><%= content_tag(:div, msg, class: "warning") %></p>
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <% elsif flash[:alert] %>
+            <div class="callout alert" data-closable>
+              <p><%= content_tag(:div, msg, class: "alert") %></p>
+              <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <% end %>
       <% end %>
+
       <%= yield %>
     </div>
   </body>

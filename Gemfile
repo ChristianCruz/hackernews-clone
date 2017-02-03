@@ -46,6 +46,9 @@ gem 'faker'
 # Dealing with sensitive data
 gem 'figaro', '1.0'
 
+# Pundit to authorize different users to different tasks
+gem 'pundit'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end

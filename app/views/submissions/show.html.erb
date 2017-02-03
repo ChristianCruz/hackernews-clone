@@ -13,6 +13,9 @@
   <h4>
     <%= @submission.title %>
   </h4>
+  <% if policy(@submission).edit? %>
+   <%= link_to "Edit", edit_submission_path(@submission), class: 'btn btn-success' %>
+ <% end %>
   URL: <a href="<%= @submission.url %>"><%= @submission.url %></a>
   <br>
   Posted <%= time_ago_in_words(@submission.created_at) %> ago by <%= @submission.user.email %>

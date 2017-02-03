@@ -1,8 +1,8 @@
 <table id="submissions-list">
-  <br>
-
   <h3 class="text-center welcome">A collection of good &amp; bad UI design.</h3>
-
+   <% if policy(Submission.new).create? %>
+    <%= link_to "New Post", new_submission_path, class: 'small button add-link' %>
+  <% end %>
   <tbody>
      <% @submissions.each do |submission| %>
        <tr class="post">

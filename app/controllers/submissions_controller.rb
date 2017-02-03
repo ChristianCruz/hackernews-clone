@@ -3,59 +3,68 @@ class SubmissionsController < ApplicationController
   # Authenticate users before showing certain content
   before_filter :authenticate_user!, except: [:index, :show]
 
-  # GET /submissions
-  # GET /submissions.json
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    redirect_to root_url, alert: exception.message
+  end
+
   def index
     @submissions = Submission.order(cached_votes_score: :desc)
+    authorize @submissions
   end
 
-  # GET /submissions/1
-  # GET /submissions/1.json
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+
   def show
+    @submission = Submission.find(params[:id])
   end
 
-  # GET /submissions/new
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+
   def new
-    @submission = current_user.submissions.build
+    # @submission = current_user.submissions.build
+    @submission = Submission.new
+    authorize @submission
   end
 
-  # GET /submissions/1/edit
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+
   def edit
+    @submission = Submission.find(params[:id])
+    authorize @submission
   end
 
-  # POST /submissions
-  # POST /submissions.json
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+
   def create
-    @submission = current_user.submissions.build(submission_params)
+    # @submission = current_user.submissions.build(submission_params)
+    @submission = Submission.new(params.require(:submission).permit(:title, :url))
     @submission.user = current_user
-
-    respond_to do |format|
+    authorize @submission
       if @submission.save
-        format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
-        format.json { render :show, status: :created, location: @submission }
+        flash[:notice] = "Submission was successfully created."
+       redirect_to @submission
       else
-        format.html { render :new }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
+        flash[:error] = "There was an error saving the post. Please try again."
+       render :new
       end
-    end
   end
 
-  # PATCH/PUT /submissions/1
-  # PATCH/PUT /submissions/1.json
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+
   def update
-    respond_to do |format|
-      if @submission.update(submission_params)
-        format.html { redirect_to @submission, notice: 'Submission was successfully updated.' }
-        format.json { render :show, status: :ok, location: @submission }
-      else
-        format.html { render :edit }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
-    end
+    @submission = submission.find(params[:id])
+    authorize @submission
+    if @submission.update_attributes(params.require(:submission).permit(:title, :url))
+     flash[:notice] = "Submission was updated."
+     redirect_to @submission
+   else
+     flash[:error] = "There was an error saving the submission. Please try again."
+     render :edit
+   end
   end
 
-  # DELETE /submissions/1
-  # DELETE /submissions/1.json
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+
   def destroy
     @submission.destroy
     respond_to do |format|
@@ -64,6 +73,8 @@ class SubmissionsController < ApplicationController
     end
   end
 
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+
   def upvote
     @submission = Submission.find(params[:id])
 
@@ -71,12 +82,16 @@ class SubmissionsController < ApplicationController
     redirect_to :back
   end
 
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
+
   def downvote
     @submission = Submission.find(params[:id])
 
     @submission.downvote_by current_user
     redirect_to :back
   end
+
+# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
 
   private
     # Use callbacks to share common setup or constraints between actions.
