@@ -1,41 +1,35 @@
 <div class="show-post">
-  <br>
   <nav aria-label="You are here:" role="navigation">
     <ul class="breadcrumbs">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Post category</a></li>
-      <li>
-        <span class="show-for-sr">Current: </span> <%= @submission.url %>
-      </li>
+      <li><%= link_to "Home", root_path  %></li>
+      <li><%= @submission.title %></li>
     </ul>
   </nav>
   <hr>
-  <h4>
-    <%= @submission.title %>
-  </h4>
-  <% if policy(@submission).edit? %>
-   <%= link_to "Edit", edit_submission_path(@submission), class: 'btn btn-success' %>
- <% end %>
-  URL: <a href="<%= @submission.url %>"><%= @submission.url %></a>
-  <br>
-  Posted <%= time_ago_in_words(@submission.created_at) %> ago by <%= @submission.user.email %>
-  <br>
-
-  <% if policy(@submission).destroy? %>
-         <%= link_to "Delete post", @submission, method: :delete, class: 'large button', data: { confirm: 'Are you sure you want to delete this topic?' } %> 
-       <% end %>
-
-  <br>
-  <p><%= @submission.get_upvotes.size %> likes</p>
-  <br>
-
-  <%= simple_form_for [@submission, Comment.new] do |f| %>
-    <%= f.text_area :body, class: "form-control", placeholder: "Either positive or negative, comments are good." %>
+  <div class="small-12 medium-7 columns">
+    <h3>
+      <%= @submission.title %>
+    </h3>
+    <p>URL: <a href="<%= @submission.url %>"><%= @submission.url %></a></p>
+    <p><%= @submission.get_upvotes.size %> likes</p>
+    <p><small>Posted <%= time_ago_in_words(@submission.created_at) %> ago by <%= @submission.user.email %></small></p>
     <br>
-    <%= f.submit "add comment", class: "large button" %>
-  <% end %>
-
-  <div id="comments">
-    <%= render :partial => @submission.comments %>
+    <% if policy(@submission).edit? %>
+     <%= link_to "Edit", edit_submission_path(@submission), class: 'medium button' %>
+    <% end %>
+    <% if policy(@submission).destroy? %>
+           <%= link_to "Delete post", @submission, method: :delete, class: 'medium button', data: { confirm: 'Are you sure you want to delete this topic?' } %>
+         <% end %>
+         <hr>
+  </div>
+  <div class="small-12 medium-5 columns">
+    <%= simple_form_for [@submission, Comment.new] do |f| %>
+      <%= f.text_area :body, class: "form-control", placeholder: "Either positive or negative, comments are good." %>
+      <%= f.submit "Add my comment", class: "medium button" %>
+    <% end %>
+    <br>
+    <div id="comments">
+      <%= render :partial => @submission.comments %>
+    </div>
   </div>
 </div>

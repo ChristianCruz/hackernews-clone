@@ -1,15 +1,18 @@
 <%= div_for(comment) do %>
 
-      <div class="card small-12 medium-6 large-3 float-left" style="width: 300px;">
+      <div class="card">
         <div class="card-divider">
-          <strong><i><%= comment.user.email %></i></strong> said
+          <%#= comment.user.email %> said:
+          <% if policy(comment).destroy? %>
+            <%= link_to [@submission, comment], class: "small alert button float-right", method: :delete, data: { confirm: 'are you sure?'} do %>
+              <i class="fi-trash"></i>
+            <% end %>
+          <% end %>
         </div>
         <div class="card-section">
           <p><i>"<%= comment.body %>"</i></p>
         </div>
-        <% if comment.user == current_user %>
-          <%= link_to 'Delete this comment', comment, class: "small alert button", method: :delete, data: { confirm: 'are you sure?'} %>
-        <% end %>
+
       </div>
 
 <% end %>

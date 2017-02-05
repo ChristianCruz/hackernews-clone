@@ -14,13 +14,12 @@
 
   <%= form_group_tag(submission.errors[:title]) do %>
        <%= f.label :title %>
-       <%= f.text_field :title, class: '', placeholder: "Enter submission title" %>
+       <%= f.text_field :title, class: '', placeholder: "Enter a title" %>
      <% end %>
      <%= form_group_tag(submission.errors[:body]) do %>
        <%= f.label :url %>
-       <%= f.text_field :url, rows: 8, class: '', placeholder: "Enter submission url" %>
+       <%= f.text_field :url, rows: 8, class: '', placeholder: "Enter the url" %>
      <% end %>
-     <div class="form-group">
-       <%= f.submit "Save", class: 'large button' %>
-     </div>
+       <%= f.submit "Save", class: 'medium button small-12 custom-button' %>
+
    <% end %>

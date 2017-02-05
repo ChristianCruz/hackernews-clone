@@ -1,8 +1,10 @@
 <table id="submissions-list">
   <h3 class="text-center welcome">A collection of good &amp; bad UI design.</h3>
-  <%= will_paginate @submissions %>
+  <hr>
    <% if policy(Submission.new).create? %>
-    <%= link_to "New Post", new_submission_path, class: 'small button add-link' %>
+   <div class="small-8 medium-5 large-3 small-centered columns add-link">
+    <%= link_to "New Post", new_submission_path, class: 'medium button' %>
+  </div>
   <% end %>
   <tbody>
      <% @submissions.each do |submission| %>
@@ -13,11 +15,11 @@
 
              <span class="float-right">
                <%= link_to like_submission_path(submission), method: :put do %>
-                 <span class="badge"><i class="fi-like"></i></span>
+                 <span class="badge like"><i class="fi-like"></i></span>
                <% end %>
 
                <%= link_to dislike_submission_path(submission), method: :put do %>
-                 <span class="badge alert"><i class="fi-dislike"></i></span>
+                 <span class="badge dislike"><i class="fi-dislike"></i></span>
                <% end %>
              </span>
            </div>
@@ -35,3 +37,4 @@
      <% end %>
    </tbody>
 </table>
+<%= will_paginate @submissions, renderer: FoundationPagination::Rails %>

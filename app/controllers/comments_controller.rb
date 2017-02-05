@@ -18,13 +18,16 @@ class CommentsController < ApplicationController
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #
 
   def destroy
-    # @submission = Submission.find(params[:id])
-    @comment = Comment.find(params[:id])
-    @comment.destroy
-    respond_to do |format|
-        format.html { redirect_to submissions_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @submission = Submission.find(params[:submission_id])
+    @comment = @submission.comments.find(params[:id])
+    authorize @comment
+    if @comment.destroy
+       flash[:notice] = "Comment was removed."
+       redirect_to @submission
+     else
+       flash[:error] = "Comment couldn't be deleted. Try again."
+       redirect_to @submission
+     end
   end
 
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = #

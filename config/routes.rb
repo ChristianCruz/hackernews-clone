@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :comments
+  # resources :comments
   devise_for :users
   resources :submissions do
     member do

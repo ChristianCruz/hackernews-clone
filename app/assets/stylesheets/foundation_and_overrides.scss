@@ -61,7 +61,7 @@
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Ubuntu', sans-serif;
-  font-weight: 700;
+  font-weight: 300;
   color: #111111;
 }
 
@@ -79,6 +79,7 @@ p {
   font-family: 'Ubuntu', sans-serif;
   padding: 0;
   background-color: #1da5ff;
+  border-bottom: 2px solid #0494f4;
   height: 30px;
   min-height: 30px;
   ul {
@@ -86,12 +87,15 @@ p {
   }
   li {
     padding: 0;
-  &.menu-text {
-    font-weight: 700 !important;
-    color: #fff;
+  &.menu-text a {
+    text-transform: none;
+    font-weight: 700;
+    color: #000;
     line-height: 28px;
-    text-shadow: 0px 1px 1px #0872b8;
     padding: 0px 15px;
+    &:hover {
+      color: #fff;
+    }
   }
     a {
       text-align: center;
@@ -103,8 +107,12 @@ p {
       line-height: 30px;
       margin-right: 1em;
       &:hover {
-        color: #fffa8b;
+        color: #fff754;
+        // font-weight: 700;
       }
+    }
+    i {
+      vertical-align: baseline !important;
     }
   }
 }
@@ -122,8 +130,8 @@ p {
 // - SUBMISSIONS LIST
 // - - - - - - - - - - - - - - - - - - - - - -
 
-.welcome {
-  // font-weight: 300;
+.pagination {
+  text-align: center;
 }
 
 .post a, .post {
@@ -133,19 +141,25 @@ p {
 }
 
   .post:hover {
-    background: rgba(255, 250, 139, 0.55);
+      background: rgba(176, 139, 255, 0.15);
+      cursor: crosshair;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     transition: all 0.3s ease-out;
   }
-
+#main > .add-link > a {
+  display: block;
+}
 #submissions-list {
   border-spacing: 0px 10px;
-  .button.add-link {
-    margin: 0 auto !important;
-    display: table !important;
-  }
   .badge {
     font-size: 1rem;
+    margin-left: 6px;
+    // width: 1.5rem !important;
+    background: #999;
+    &:hover {
+      background-color: #fff354;
+      color: #000;
+    }
   }
   .title-link {
     a {
@@ -166,6 +180,10 @@ p {
 
 .show-post {
   .card {
-    margin-right: 10px;
+    .card-divider {
+      .button {
+        margin-top: -5px !important;
+      }
+    }
   }
 }
